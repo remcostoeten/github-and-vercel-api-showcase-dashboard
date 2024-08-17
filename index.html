@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub and Vercel api Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: #e0e0e0;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: auto;
+        }
+        h1 {
+            color: #fff;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        .tab {
+            display: inline-block;
+            margin-right: 20px;
+            padding: 10px;
+            cursor: pointer;
+            background-color: #333;
+            border-radius: 5px;
+        }
+        .tab.active {
+            background-color: #0070f3;
+            color: #fff;
+        }
+        .content {
+            margin-top: 20px;
+        }
+        .card {
+            background-color: #1e1e1e;
+            border: 1px solid #333;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .card-header {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .card-body p {
+            margin: 5px 0;
+        }
+        a {
+            color: #0070f3;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>GitHub and Vercel Dashboard</h1>
+        <div id="tabs">
+            <div class="tab active" onclick="showTab('vercelContent')">Vercel Deployments</div>
+            <div class="tab" onclick="showTab('githubRepos')">Repositories</div>
+            <div class="tab" onclick="showTab('githubEvents')">User Events</div>
+            <div class="tab" onclick="showTab('githubCommits')">Commits</div>
+            <div class="tab" onclick="showTab('receivedEvents')">Received Events</div>
+        </div>
+        <div id="content" class="content">
+            <div id="vercelContent">
+                <p>Fetching data from Vercel API at <code>https://api.vercel.com/v5/now/deployments</code>...</p>
+            </div>
+            <div id="githubRepos" style="display:none;">
+                <p>Fetching data from GitHub Repositories API at <code>https://api.github.com/users/remcostoeten/repos</code>...</p>
+            </div>
+            <div id="githubEvents" style="display:none;">
+                <p>Fetching data from GitHub User Events API at <code>https://api.github.com/users/remcostoeten/events</code>...</p>
+            </div>
+            <div id="githubCommits" style="display:none;">
+                <p>Fetching data from GitHub Commits API at <code>https://api.github.com/repos/remcostoeten/productivity-panel/commits</code>...</p>
+            </div>
+            <div id="receivedEvents" style="display:none;">
+                <p>Fetching data from GitHub Received Events API at <code>https://api.github.com/users/remcostoeten/received_events</code>...</p>
+            </div>
+        </div>
+    </div>
+    <script>
+        const vercelApiUrl = 'https://api.vercel.com/v5/now/deployments';
+        const githubApiBaseUrl = 'https://api.github.com';
+        const githubToken = 'YOUR_GITHUB_TOKEN';
+        const vercelToken = 'YOUR_VERCEL_TOKEN';
+        const username = 'remcostoeten';
+
+        // Utility function to set active tab
+        function showTab(tabId) {
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.content > div').forEach(div => {
+                div.style.display = 'none';
+            });
+            document.querySelector(`[onclick="showTab('${tabId}')"]`).classList.add('active');
+            document.getElementById(tabId).style.display = 'block';
+        }
+
+        // Fetch and display Vercel Deployments
+        fetch(vercelApiUrl, {
+            headers: {
+                'Authorization': `Bearer ${vercelToken}`
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            const container = document.getElementById('vercelContent');
+            container.innerHTML = '<p>Fetching data from Vercel API at <code>https://api.vercel.com/v5/now/deployments</code>...</p>';
+            data.deployments.forEach(deployment => {
+                container.innerHTML += `
+                    <div class="card">
+                        <div class="card-header">
+                            Deployment: ${deployment.name}
+                        </div>
+                        <div class="card-body">
+                            <p><strong>State:</strong> ${deployment.state}</p>
+                            <p><strong>URL:</strong> <a href="https://${deployment.url}" target="_blank">${deployment.url}</a></p>
+                            <p><strong>Created at:</strong> ${new Date(deployment.created).toLocaleString()}</p>
+                        </div>
+                    </div>
+                `;
+            });
+        })
+        .catch(error => {
+            document.getElementById('vercelContent').innerText = 'Failed to load Vercel deployments';
+            console.error('Error fetching Vercel deployments:', error);
+        });
+
+        // Fetch and display GitHub Repositories
+        fetch(`${githubApiBaseUrl}/users/${username}/repos`, {
+            headers: {
+                'Authorization': `Bearer ${githubToken}`
+            }
+        })
+        .then(response => response.json())
+        .then(repos => {
+            const container = document.getElementById('githubRepos');
+            container.innerHTML = '<p>Fetching data from GitHub Repositories API at <code>https://api.github.com/users/remcostoeten/repos</code>...</p>';
+            repos.forEach(repo => {
+                container.innerHTML += `
+                    <div class="card">
+                        <div class="card-header">
+                            Repository: ${repo.name}
+                        </div>
+                        <div class="card-body">
+                            <p><strong>Description:</strong> ${repo.description}</p>
+                            <p><strong>Created at:</strong> ${new Date(repo.created_at).toLocaleString()}</p>
+                            <p><strong>Last updated:</strong> ${new Date(repo.updated_at).toLocaleString()}</p>
+                            <p><strong>Language:</strong> ${repo.language}</p>
+                            <p><strong>URL:</strong> <a href="${repo.html_url}" target="_blank">${repo.html_url}</a></p>
+                        </div>
+                    </div>
+                `;
+            });
+        })
+        .catch(error => {
+            document.getElementById('githubRepos').innerText = 'Failed to load GitHub repositories';
+            console.error('Error fetching GitHub repositories:', error);
+        });
+
+        // Fetch and display GitHub Events
+        fetch(`${githubApiBaseUrl}/users/${username}/events`, {
+            headers: {
+                'Authorization': `Bearer ${githubToken}`
+            }
+        })
+        .then(response => response.json())
+        .then(events => {
+            const container = document.getElementById('githubEvents');
+            container.innerHTML = '<p>Fetching data from GitHub User Events API at <code>https://api.github.com/users/remcostoeten/events</code>...</p>';
+            events.forEach(event => {
+                container.innerHTML += `
+                    <div class="card">
+                        <div class="card-header">
+                            Event Type: ${event.type}
+                        </div>
+                        <div class="card-body">
+                            <p><strong>Repository:</strong> ${event.repo.name}</p>
+                            <p><strong>Created at:</strong> ${new Date(event.created_at).toLocaleString()}</p>
+                        </div>
+                    </div>
+                `;
+            });
+        })
+        .catch(error => {
+            document.getElementById('githubEvents').innerText = 'Failed to load GitHub events';
+            console.error('Error fetching GitHub events:', error);
+        });
+
+        // Fetch and display GitHub Commits
+        fetch(`${githubApiBaseUrl}/repos/${username}/productivity-panel/commits`, {
+            headers: {
+                'Authorization': `Bearer ${githubToken}`
+            }
+        })
+        .then(response => response.json())
+        .then(commits => {
+            const container = document.getElementById('githubCommits');
+            container.innerHTML = '<p>Fetching data from GitHub Commits API at <code>https://api.github.com/repos/remcostoeten/productivity-panel/commits</code>...</p>';
+            commits.forEach(commit => {
+                container.innerHTML += `
+                    <div class="card">
+                        <div class="card-header">
+                            Commit: ${commit.commit.message}
+                        </div>
+                        <div class="card-body">
+                            <p><strong>Author:</strong> ${commit.commit.author.name}</p>
+                            <p><strong>Date:</strong> ${new Date(commit.commit.author.date).toLocaleString()}</p>
+                            <p><strong>URL:</strong> <a href="${commit.html_url}" target="_blank">${commit.html_url}</a></p>
+                        </div>
+                    </div>
+                `;
+            });
+        })
+        .catch(error => {
+            document.getElementById('githubCommits').innerText = 'Failed to load GitHub commits';
+            console.error('Error fetching GitHub commits:', error);
+        });
+
+        // Fetch and display GitHub Received Events
+        fetch(`${githubApiBaseUrl}/users/${username}/received_events`, {
+            headers: {
+                'Authorization': `Bearer ${githubToken}`
+            }
+        })
+        .then(response => response.json())
+        .then(receivedEvents => {
+            const container = document.getElementById('receivedEvents');
+            container.innerHTML = '<p>Fetching data from GitHub Received Events API at <code>https://api.github.com/users/remcostoeten/received_events</code>...</p>';
+            receivedEvents.forEach(event => {
+                container.innerHTML += `
+                    <div class="card">
+                        <div class="card-header">
+                            Received Event: ${event.type}
+                        </div>
+                        <div class="card-body">
+                            <p><strong>Repository:</strong> ${event.repo.name}</p>
+                            <p><strong>Created at:</strong> ${new Date(event.created_at).toLocaleString()}</p>
+                        </div>
+                    </div>
+                `;
+            });
+        })
+        .catch(error => {
+            document.getElementById('receivedEvents').innerText = 'Failed to load GitHub received events';
+            console.error('Error fetching GitHub received events:', error);
+        });
+    </script>
+</body>
+</html>
