@@ -20,16 +20,18 @@ Demo: [can be seen here](https://api.remcostoeten.com)
 
 2. Install dependencies:
 
-   ```bash
-   npm install
-   ```
+```bash
+npm install
+```
 
 3. Create a `.env` file in the root directory with your API tokens:
 
 ```bash
-GITHUB_TOKEN=your_github_token_here
-VERCEL_TOKEN=your_vercel_token_here
+#https://github.com/settings/tokens?type=beta
+GITHUB_TOKEN=
 
+#https://vercel.com/account/tokens
+VERCEL_TOKEN=
 ```
 
 4. Start the server:
