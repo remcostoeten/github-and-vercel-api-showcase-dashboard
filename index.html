@@ -1,359 +1,548 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Personal GitHub &amp; Vercel Endpoints</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <style>
-        body {
-            background-color: #000;
-            color: #e0e0e0;
-        }
-        .tab-content {
-            display: none;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.3s ease, transform 0.3s ease;
-        }
-        .tab-content.active {
-            display: block;
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .card {
-            opacity: 0;
-            transform: scale(0.95);
-            transition: opacity 0.3s ease, transform 0.3s ease;
-            background-color: #111;
-            border: 1px solid #333;
-        }
-        .card.show {
-            opacity: 1;
-            transform: scale(1);
-        }
-        .fancy-bg {
-            background: linear-gradient(45deg, #000, #111);
-        }
-        .glow {
-            box-shadow: 0 0 10px rgba(0, 112, 243, 0.5);
-        }
-        .fancy-border {
-            border: 1px solid rgba(0, 112, 243, 0.3);
-        }
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
-        }
-        .pulse {
-            animation: pulse 1.5s infinite;
-        }
-    </style>
-</head>
-<body class="min-h-screen fancy-bg flex flex-col">
-    <header class="bg-gray-800 py-4 px-6 flex justify-between items-center">
-        <div>
-            <h1 class="text-2xl font-bold text-white">Personal GitHub &amp; Vercel Endpoints</h1>
-            <p class="text-gray-400">Showcase of API integrations</p>
-        </div>
-        <a href="https://github.com/remcostoeten" target="_blank" class="text-white hover:text-gray-300">
-            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd" />
-            </svg>
-        </a>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styless.css" />
+  </head>
+  <body class="min-h-screen fancy-bg flex flex-col">
+    <header
+      class="bg-black py-4 px-6 flex justify-between items-center border-b border-gray-800"
+    >
+      <div>
+        <h1 class="text-2xl font-bold text-white">
+          Remco Stoeten's GitHub &amp; Vercel Endpoints
+        </h1>
+        <p class="text-gray-500">Showcase of API integrations</p>
+      </div>
+      <a
+        href="https://github.com/remcostoeten"
+        target="_blank"
+        class="text-white hover:text-gray-300"
+      >
+        <svg
+          class="w-8 h-8"
+          fill="currentColor"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+            clip-rule="evenodd"
+          />
+        </svg>
+      </a>
     </header>
 
     <main class="flex-grow container mx-auto px-4 py-8">
-        <div class="flex flex-wrap justify-center space-x-2 space-y-2 mb-6">
-            <button class="tab-button bg-gray-800 text-gray-300 px-4 py-2 rounded-md hover:bg-gray-700 transition-all duration-300 fancy-border" onclick="showTab('githubProfileContent')">GitHub Profile</button>
-            <button class="tab-button bg-gray-800 text-gray-300 px-4 py-2 rounded-md hover:bg-gray-700 transition-all duration-300 fancy-border" onclick="showTab('githubReposContent')">GitHub Repos</button>
-            <button class="tab-button bg-gray-800 text-gray-300 px-4 py-2 rounded-md hover:bg-gray-700 transition-all duration-300 fancy-border" onclick="showTab('githubStarredContent')">Starred Repos</button>
-            <button class="tab-button bg-gray-800 text-gray-300 px-4 py-2 rounded-md hover:bg-gray-700 transition-all duration-300 fancy-border" onclick="showTab('githubGistsContent')">Gists</button>
-            <button class="tab-button bg-gray-800 text-gray-300 px-4 py-2 rounded-md hover:bg-gray-700 transition-all duration-300 fancy-border" onclick="showTab('vercelUserContent')">Vercel User</button>
-            <button class="tab-button bg-gray-800 text-gray-300 px-4 py-2 rounded-md hover:bg-gray-700 transition-all duration-300 fancy-border" onclick="showTab('vercelProjectsContent')">Vercel Projects</button>
-            <button class="tab-button bg-gray-800 text-gray-300 px-4 py-2 rounded-md hover:bg-gray-700 transition-all duration-300 fancy-border" onclick="showTab('vercelDomainsContent')">Vercel Domains</button>
-        </div>
+      <div class="flex flex-wrap justify-center space-x-2 space-y-2 mb-6">
+        <button
+          class="tab-button bg-gray-900 text-gray-400 px-4 py-2 rounded-md hover:bg-gray-800 transition-all duration-300 fancy-border"
+          onclick="showTab('githubProfileContent')"
+        >
+          GitHub Profile
+        </button>
+        <button
+          class="tab-button bg-gray-900 text-gray-400 px-4 py-2 rounded-md hover:bg-gray-800 transition-all duration-300 fancy-border"
+          onclick="showTab('githubReposContent')"
+        >
+          GitHub Repos
+        </button>
+        <button
+          class="tab-button bg-gray-900 text-gray-400 px-4 py-2 rounded-md hover:bg-gray-800 transition-all duration-300 fancy-border"
+          onclick="showTab('githubStarredContent')"
+        >
+          Starred Repos
+        </button>
+        <button
+          class="tab-button bg-gray-900 text-gray-400 px-4 py-2 rounded-md hover:bg-gray-800 transition-all duration-300 fancy-border"
+          onclick="showTab('githubGistsContent')"
+        >
+          Gists
+        </button>
+        <button
+          class="tab-button bg-gray-900 text-gray-400 px-4 py-2 rounded-md hover:bg-gray-800 transition-all duration-300 fancy-border"
+          onclick="showTab('vercelUserContent')"
+        >
+          Vercel User
+        </button>
+        <button
+          class="tab-button bg-gray-900 text-gray-400 px-4 py-2 rounded-md hover:bg-gray-800 transition-all duration-300 fancy-border"
+          onclick="showTab('vercelProjectsContent')"
+        >
+          Vercel Projects
+        </button>
+        <button
+          class="tab-button bg-gray-900 text-gray-400 px-4 py-2 rounded-md hover:bg-gray-800 transition-all duration-300 fancy-border"
+          onclick="showTab('vercelDomainsContent')"
+        >
+          Vercel Domains
+        </button>
+      </div>
 
-        <div id="filterContainer" class="mb-4">
-            <h3 class="text-lg font-semibold mb-2">Filter:</h3>
-            <div id="filterOptions" class="flex flex-wrap gap-4">
-                <!-- Filter checkboxes will be dynamically added here -->
-            </div>
+      <div id="filterContainer" class="mb-4">
+        <h3 class="text-lg font-semibold mb-2 text-white">Filter:</h3>
+        <div id="filterOptions" class="flex flex-wrap gap-4">
+          <!-- Filter checkboxes will be dynamically added here -->
         </div>
+      </div>
 
-        <div id="content" class="mt-6">
-            <div id="githubProfileContent" class="tab-content">
-                <h2 class="text-2xl font-semibold mb-4 text-white">GitHub Profile</h2>
-                <div id="githubProfile"></div>
-            </div>
-            <div id="githubReposContent" class="tab-content">
-                <h2 class="text-2xl font-semibold mb-4 text-white">GitHub Repositories</h2>
-                <div id="githubRepos"></div>
-            </div>
-            <div id="githubStarredContent" class="tab-content">
-                <h2 class="text-2xl font-semibold mb-4 text-white">Starred Repositories</h2>
-                <div id="githubStarred"></div>
-            </div>
-            <div id="githubGistsContent" class="tab-content">
-                <h2 class="text-2xl font-semibold mb-4 text-white">Gists</h2>
-                <div id="githubGists"></div>
-            </div>
-            <div id="vercelUserContent" class="tab-content">
-                <h2 class="text-2xl font-semibold mb-4 text-white">Vercel User Information</h2>
-                <div id="vercelUser"></div>
-            </div>
-            <div id="vercelProjectsContent" class="tab-content">
-                <h2 class="text-2xl font-semibold mb-4 text-white">Vercel Projects</h2>
-                <div id="vercelProjects"></div>
-            </div>
-            <div id="vercelDomainsContent" class="tab-content">
-                <h2 class="text-2xl font-semibold mb-4 text-white">Vercel Domains</h2>
-                <div id="vercelDomains"></div>
-            </div>
+      <div id="content" class="mt-6">
+        <div id="githubProfileContent" class="tab-content">
+          <h2 class="text-2xl font-semibold mb-4 text-white">GitHub Profile</h2>
+          <p class="mb-4 text-gray-400">
+            This tab displays your GitHub profile information, including your
+            bio, location, and follower counts. It uses the GitHub API endpoint:
+            <code class="bg-gray-800 px-2 py-1 rounded"
+              >https://api.github.com/users/{username}</code
+            >
+          </p>
+          <div id="githubProfile"></div>
         </div>
+        <div id="githubReposContent" class="tab-content">
+          <h2 class="text-2xl font-semibold mb-4 text-white">
+            GitHub Repositories
+          </h2>
+          <p class="mb-4 text-gray-400">
+            This tab shows all your public GitHub repositories, including their
+            descriptions, languages, and star counts. It uses the GitHub API
+            endpoint:
+            <code class="bg-gray-800 px-2 py-1 rounded"
+              >https://api.github.com/users/{username}/repos</code
+            >
+          </p>
+          <div id="githubRepos"></div>
+        </div>
+        <div id="githubStarredContent" class="tab-content">
+          <h2 class="text-2xl font-semibold mb-4 text-white">
+            Starred Repositories
+          </h2>
+          <p class="mb-4 text-gray-400">
+            This tab displays the GitHub repositories you've starred. It uses
+            the GitHub API endpoint:
+            <code class="bg-gray-800 px-2 py-1 rounded"
+              >https://api.github.com/users/{username}/starred</code
+            >
+          </p>
+          <div id="githubStarred"></div>
+        </div>
+        <div id="githubGistsContent" class="tab-content">
+          <h2 class="text-2xl font-semibold mb-4 text-white">Gists</h2>
+          <p class="mb-4 text-gray-400">
+            This tab shows your public Gists, which are snippets of code you've
+            shared on GitHub. It uses the GitHub API endpoint:
+            <code class="bg-gray-800 px-2 py-1 rounded"
+              >https://api.github.com/users/{username}/gists</code
+            >
+          </p>
+          <div id="githubGists"></div>
+        </div>
+        <div id="vercelUserContent" class="tab-content">
+          <h2 class="text-2xl font-semibold mb-4 text-white">
+            Vercel User Information
+          </h2>
+          <p class="mb-4 text-gray-400">
+            This tab displays your Vercel account information. It uses the
+            Vercel API endpoint:
+            <code class="bg-gray-800 px-2 py-1 rounded"
+              >https://api.vercel.com/v2/user</code
+            >
+          </p>
+          <div id="vercelUser"></div>
+        </div>
+        <div id="vercelProjectsContent" class="tab-content">
+          <h2 class="text-2xl font-semibold mb-4 text-white">
+            Vercel Projects
+          </h2>
+          <p class="mb-4 text-gray-400">
+            This tab shows all your Vercel projects, including their names,
+            frameworks, and latest deployment URLs. It uses the Vercel API
+            endpoint:
+            <code class="bg-gray-800 px-2 py-1 rounded"
+              >https://api.vercel.com/v9/projects</code
+            >
+          </p>
+          <div id="vercelProjects"></div>
+        </div>
+        <div id="vercelDomainsContent" class="tab-content">
+          <h2 class="text-2xl font-semibold mb-4 text-white">Vercel Domains</h2>
+          <p class="mb-4 text-gray-400">
+            This tab displays the domains associated with your Vercel account.
+            It uses the Vercel API endpoint:
+            <code class="bg-gray-800 px-2 py-1 rounded"
+              >https://api.vercel.com/v5/domains</code
+            >
+          </p>
+          <div id="vercelDomains"></div>
+        </div>
+      </div>
     </main>
 
-    <footer class="bg-gray-800 py-4 px-6 flex justify-between items-center">
-        <div>
-            <p class="text-white">
-                Built with 
-                <span class="text-red-500 inline-block pulse">❤</span> 
-                by Remco Stoeten
-            </p>
-            <a href="https://remcostoeten.com" target="_blank" class="text-blue-400 hover:underline">https://remcostoeten.com</a>
-            <br>
-            <a href="https://github.com/remcostoeten" target="_blank" class="text-blue-400 hover:underline">https://github.com/remcostoeten</a>
-        </div>
-        <a href="https://github.com/remcostoeten/github-vercel-api-dashboard" target="_blank" class="bg-gray-700 text-white px-4 py-2 rounded-md hover:bg-gray-600 transition-colors duration-300">
-            Star on GitHub
-        </a>
+    <footer
+      class="bg-black py-4 px-6 flex justify-between items-center border-t border-gray-800"
+    >
+      <div>
+        <p class="text-gray-400">
+          Built with
+          <span class="text-red-500 inline-block pulse">❤</span>
+          by Remco Stoeten
+        </p>
+        <a
+          href="https://remcostoeten.com"
+          target="_blank"
+          class="text-blue-400 hover:underline"
+          >https://remcostoeten.com</a
+        >
+        <br />
+        <a
+          href="https://github.com/remcostoeten"
+          target="_blank"
+          class="text-blue-400 hover:underline"
+          >https://github.com/remcostoeten</a
+        >
+      </div>
+      <a
+        href="https://github.com/remcostoeten/github-vercel-api-dashboard"
+        target="_blank"
+        class="bg-gray-800 text-white px-4 py-2 rounded-md hover:bg-gray-700 transition-colors duration-300"
+      >
+        Star on GitHub
+      </a>
     </footer>
 
     <script>
-        const githubToken = 'YOUR_GITHUB_TOKEN';
-        const vercelToken = 'YOUR_VERCEL_TOKEN';
-        const username = 'remcostoeten';
-        const repo = 'productivity-panel'; // Replace with your actual repo name
+      const githubToken = "YOUR_GITHUB_TOKEN";
+      const vercelToken = "YOUR_VERCEL_TOKEN";
+      const username = "remcostoeten";
+      const repo = "productivity-panel"; // Replace with your actual repo name
 
-        let allCards = [];
+      let allCards = [];
 
-        function showTab(tabId) {
-            document.querySelectorAll('.tab-content').forEach(content => {
-                content.classList.remove('active');
-            });
-            document.querySelectorAll('.tab-button').forEach(button => {
-                button.classList.remove('bg-blue-600', 'text-white', 'glow');
-                button.classList.add('bg-gray-800', 'text-gray-300');
-            });
-            document.getElementById(tabId).classList.add('active');
-            const activeButton = document.querySelector(`[onclick="showTab('${tabId}')"]`);
-            activeButton.classList.remove('bg-gray-800', 'text-gray-300');
-            activeButton.classList.add('bg-blue-600', 'text-white', 'glow');
+      function showTab(tabId) {
+        document.querySelectorAll(".tab-content").forEach((content) => {
+          content.classList.remove("active");
+        });
+        document.querySelectorAll(".tab-button").forEach((button) => {
+          button.classList.remove("bg-blue-600", "text-white", "glow");
+          button.classList.add("bg-gray-900", "text-gray-400");
+        });
+        document.getElementById(tabId).classList.add("active");
+        const activeButton = document.querySelector(
+          `[onclick="showTab('${tabId}')"]`,
+        );
+        activeButton.classList.remove("bg-gray-900", "text-gray-400");
+        activeButton.classList.add("bg-blue-600", "text-white", "glow");
 
-            // Load data for the active tab
-            const loadFunctions = {
-                'githubProfileContent': loadGithubProfile,
-                'githubReposContent': loadGithubRepos,
-                'githubStarredContent': loadGithubStarred,
-                'githubGistsContent': loadGithubGists,
-                'vercelUserContent': loadVercelUser,
-                'vercelProjectsContent': loadVercelProjects,
-                'vercelDomainsContent': loadVercelDomains
-            };
-            if (loadFunctions[tabId]) {
-                loadFunctions[tabId]();
-            }
+        // Clear existing filters
+        document.getElementById("filterOptions").innerHTML = "";
+        allCards = [];
+
+        // Load data for the active tab
+        const loadFunctions = {
+          githubProfileContent: loadGithubProfile,
+          githubReposContent: loadGithubRepos,
+          githubStarredContent: loadGithubStarred,
+          githubGistsContent: loadGithubGists,
+          vercelUserContent: loadVercelUser,
+          vercelProjectsContent: loadVercelProjects,
+          vercelDomainsContent: loadVercelDomains,
+        };
+        if (loadFunctions[tabId]) {
+          loadFunctions[tabId]();
         }
+      }
 
-        function createCard(title, content, tags = []) {
-            const card = document.createElement('div');
-            card.className = 'card rounded-lg p-6 mb-4 shadow-lg fancy-border';
-            card.innerHTML = `
+      function createCard(title, content, tags = []) {
+        const card = document.createElement("div");
+        card.className = "card rounded-lg p-6 mb-4 shadow-lg fancy-border";
+        card.innerHTML = `
                 <h3 class="text-xl font-semibold mb-4 text-white">${title}</h3>
                 ${content}
             `;
-            card.tags = tags;
-            setTimeout(() => card.classList.add('show'), 50);
-            return card;
-        }
+        card.tags = tags;
+        setTimeout(() => card.classList.add("show"), 50);
+        return card;
+      }
 
-        async function fetchData(url, token, isVercel = false) {
-            const headers = {
-                'Authorization': `Bearer ${token}`
-            };
-            if (isVercel) {
-                headers['Content-Type'] = 'application/json';
-            }
-            const response = await fetch(url, { headers });
-            return response.json();
-        }
-
-        function setupFilters(tags) {
-            const filterOptions = document.getElementById('filterOptions');
-            filterOptions.innerHTML = '';
-            tags.forEach(tag => {
-                const checkbox = document.createElement('label');
-                checkbox.className = 'inline-flex items-center mr-4 mb-2';
-                checkbox.innerHTML = `
-                    <input type="checkbox" class="form-checkbox h-5 w-5 text-blue-600" value="${tag}">
-                    <span class="ml-2 text-white">${tag}</span>
-                `;
-                filterOptions.appendChild(checkbox);
-            });
-
-            filterOptions.addEventListener('change', applyFilters);
-        }
-
-        function applyFilters() {
-            const selectedFilters = Array.from(document.querySelectorAll('#filterOptions input:checked')).map(cb => cb.value);
-            allCards.forEach(card => {
-                if (selectedFilters.length === 0 || selectedFilters.some(filter => card.tags.includes(filter))) {
-                    card.style.display = '';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        }
-
-        async function loadGithubProfile() {
-            const data = await fetchData(`https://api.github.com/users/${username}`, githubToken);
-            const container = document.getElementById('githubProfileContent');
-            container.innerHTML = '';
-            const content = `
-                <p><strong>Name:</strong> ${data.name}</p>
-                <p><strong>Bio:</strong> ${data.bio || 'No bio'}</p>
-                <p><strong>Location:</strong> ${data.location || 'Not specified'}</p>
-                <p><strong>Public Repos:</strong> ${data.public_repos}</p>
-                <p><strong>Followers:</strong> ${data.followers}</p>
-                <p><strong>Following:</strong> ${data.following}</p>
-                <a href="${data.html_url}" target="_blank" class="text-blue-400 hover:underline">View on GitHub →</a>
-            `;
-            const card = createCard('Profile', content, ['github', 'profile']);
-            container.appendChild(card);
-            allCards = [card];
-            setupFilters(['github', 'profile']);
-        }
-
-        async function loadGithubRepos() {
-            const data = await fetchData(`https://api.github.com/users/${username}/repos`, githubToken);
-            const container = document.getElementById('githubReposContent');
-            container.innerHTML = '';
-            allCards = [];
-            data.forEach(repo => {
-                const content = `
-                    <p><strong>Description:</strong> ${repo.description || 'No description'}</p>
-                    <p><strong>Language:</strong> ${repo.language || 'Not specified'}</p>
-                    <p><strong>Stars:</strong> ${repo.stargazers_count}</p>
-                    <p><strong>Forks:</strong> ${repo.forks_count}</p>
-                    <p><strong>Last update<p><strong>Last updated:</strong> ${new Date(repo.updated_at).toLocaleString()}</p>
-                    <a href="${repo.html_url}" target="_blank" class="text-blue-400 hover:underline">View on GitHub →</a>
-                `;
-                const card = createCard(repo.name, content, ['github', 'repo', repo.language]);
-                container.appendChild(card);
-                allCards.push(card);
-            });
-            setupFilters(['github', 'repo', ...new Set(data.map(repo => repo.language).filter(Boolean))]);
-        }
-
-        async function loadGithubStarred() {
-            const data = await fetchData(`https://api.github.com/users/${username}/starred`, githubToken);
-            const container = document.getElementById('githubStarredContent');
-            container.innerHTML = '';
-            allCards = [];
-            data.forEach(repo => {
-                const content = `
-                    <p><strong>Owner:</strong> ${repo.owner.login}</p>
-                    <p><strong>Description:</strong> ${repo.description || 'No description'}</p>
-                    <p><strong>Language:</strong> ${repo.language || 'Not specified'}</p>
-                    <p><strong>Stars:</strong> ${repo.stargazers_count}</p>
-                    <a href="${repo.html_url}" target="_blank" class="text-blue-400 hover:underline">View on GitHub →</a>
-                `;
-                const card = createCard(repo.name, content, ['github', 'starred', repo.language]);
-                container.appendChild(card);
-                allCards.push(card);
-            });
-            setupFilters(['github', 'starred', ...new Set(data.map(repo => repo.language).filter(Boolean))]);
-        }
-
-        async function loadGithubGists() {
-            const data = await fetchData(`https://api.github.com/users/${username}/gists`, githubToken);
-            const container = document.getElementById('githubGistsContent');
-            container.innerHTML = '';
-            allCards = [];
-            data.forEach(gist => {
-                const files = Object.keys(gist.files).join(', ');
-                const content = `
-                    <p><strong>Description:</strong> ${gist.description || 'No description'}</p>
-                    <p><strong>Files:</strong> ${files}</p>
-                    <p><strong>Created at:</strong> ${new Date(gist.created_at).toLocaleString()}</p>
-                    <a href="${gist.html_url}" target="_blank" class="text-blue-400 hover:underline">View Gist →</a>
-                `;
-                const card = createCard('Gist', content, ['github', 'gist']);
-                container.appendChild(card);
-                allCards.push(card);
-            });
-            setupFilters(['github', 'gist']);
-        }
-
-        async function loadVercelUser() {
-            const data = await fetchData('https://api.vercel.com/v2/user', vercelToken, true);
-            const container = document.getElementById('vercelUserContent');
-            container.innerHTML = '';
-            const content = `
-                <p><strong>Name:</strong> ${data.name}</p>
-                <p><strong>Email:</strong> ${data.email}</p>
-                <p><strong>Username:</strong> ${data.username}</p>
-                <p><strong>Account Type:</strong> ${data.account.type}</p>
-                <p><strong>Created At:</strong> ${new Date(data.createdAt).toLocaleString()}</p>
-            `;
-            const card = createCard('Vercel User', content, ['vercel', 'user']);
-            container.appendChild(card);
-            allCards = [card];
-            setupFilters(['vercel', 'user']);
-        }
-
-        async function loadVercelProjects() {
-            const data = await fetchData('https://api.vercel.com/v9/projects', vercelToken, true);
-            const container = document.getElementById('vercelProjectsContent');
-            container.innerHTML = '';
-            allCards = [];
-            data.projects.forEach(project => {
-                const content = `
-                    <p><strong>Name:</strong> ${project.name}</p>
-                    <p><strong>Framework:</strong> ${project.framework || 'Not specified'}</p>
-                    <p><strong>Created At:</strong> ${new Date(project.createdAt).toLocaleString()}</p>
-                    <p><strong>Latest Deployment:</strong> ${project.latestDeployments[0]?.url || 'N/A'}</p>
-                `;
-                const card = createCard(project.name, content, ['vercel', 'project', project.framework]);
-                container.appendChild(card);
-                allCards.push(card);
-            });
-            setupFilters(['vercel', 'project', ...new Set(data.projects.map(project => project.framework).filter(Boolean))]);
-        }
-
-        async function loadVercelDomains() {
-            const data = await fetchData('https://api.vercel.com/v5/domains', vercelToken, true);
-            const container = document.getElementById('vercelDomainsContent');
-            container.innerHTML = '';
-            allCards = [];
-            data.domains.forEach(domain => {
-                const content = `
-                    <p><strong>Name:</strong> ${domain.name}</p>
-                    <p><strong>Created At:</strong> ${new Date(domain.createdAt).toLocaleString()}</p>
-                    <p><strong>Verified:</strong> ${domain.verified ? 'Yes' : 'No'}</p>
-                    <p><strong>Nameservers:</strong> ${domain.nameservers.join(', ') || 'None'}</p>
-                `;
-                const card = createCard(domain.name, content, ['vercel', 'domain']);
-                container.appendChild(card);
-                allCards.push(card);
-            });
-            setupFilters(['vercel', 'domain']);
-        }
-
-        window.onload = function() {
-            showTab('githubProfileContent');
+      async function fetchData(url, token, isVercel = false) {
+        const headers = {
+          Authorization: `Bearer ${token}`,
         };
+        if (isVercel) {
+          headers["Content-Type"] = "application/json";
+        }
+        const response = await fetch(url, { headers });
+        return response.json();
+      }
+
+      function setupFilters(tags) {
+        const filterOptions = document.getElementById("filterOptions");
+        filterOptions.innerHTML = "";
+        tags.forEach((tag) => {
+          const checkbox = document.createElement("label");
+          checkbox.className = "inline-flex items-center mr-4 mb-2";
+          checkbox.innerHTML = `
+                    <input type="checkbox" class="form-checkbox h-5 w-5 text-blue-600" value="${tag}">
+                    <span class="ml-2 text-gray-400">${tag} (${allCards.filter((card) => card.tags.includes(tag)).length})</span>
+                `;
+          filterOptions.appendChild(checkbox);
+        });
+
+        filterOptions.addEventListener("change", applyFilters);
+      }
+
+      function applyFilters() {
+        const selectedFilters = Array.from(
+          document.querySelectorAll("#filterOptions input:checked"),
+        ).map((cb) => cb.value);
+        let visibleCards = 0;
+        allCards.forEach((card) => {
+          if (
+            selectedFilters.length === 0 ||
+            selectedFilters.some((filter) => card.tags.includes(filter))
+          ) {
+            card.style.display = "";
+            visibleCards++;
+          } else {
+            card.style.display = "none";
+          }
+        });
+        updateFilterCounts();
+        const activeTab = document.querySelector(".tab-content.active");
+        if (activeTab) {
+          const header = activeTab.querySelector("h2");
+          if (header) {
+            header.textContent =
+              header.textContent.split("(")[0] + `(${visibleCards} items)`;
+          }
+        }
+      }
+
+      function updateFilterCounts() {
+        document.querySelectorAll("#filterOptions label").forEach((label) => {
+          const checkbox = label.querySelector("input");
+          const count = allCards.filter(
+            (card) =>
+              card.tags.includes(checkbox.value) &&
+              card.style.display !== "none",
+          ).length;
+          label.querySelector("span").textContent =
+            `${checkbox.value} (${count})`;
+        });
+      }
+
+      async function loadGithubProfile() {
+        const data = await fetchData(
+          `https://api.github.com/users/${username}`,
+          githubToken,
+        );
+        const container = document.getElementById("githubProfileContent");
+        container.querySelector("h2").textContent = `GitHub Profile (1 item)`;
+        const content = `
+    <p><strong>Name:</strong> ${data.name}</p>
+    <p><strong>Bio:</strong> ${data.bio || "No bio"}</p>
+    <p><strong>Location:</strong> ${data.location || "Not specified"}</p>
+    <p><strong>Public Repos:</strong> ${data.public_repos}</p>
+    <p><strong>Followers:</strong> ${data.followers}</p>
+    <p><strong>Following:</strong> ${data.following}</p>
+    <a href="${data.html_url}" target="_blank" class="text-blue-400 hover:underline">View on GitHub →</a>
+`;
+        const card = createCard("Profile", content, ["github", "profile"]);
+        container.querySelector("#githubProfile").innerHTML = "";
+        container.querySelector("#githubProfile").appendChild(card);
+        allCards = [card];
+        setupFilters(["github", "profile"]);
+      }
+
+      async function loadGithubRepos() {
+        const data = await fetchData(
+          `https://api.github.com/users/${username}/repos`,
+          githubToken,
+        );
+        const container = document.getElementById("githubReposContent");
+        container.querySelector("h2").textContent =
+          `GitHub Repositories (${data.length} items)`;
+        const reposContainer = container.querySelector("#githubRepos");
+        reposContainer.innerHTML = "";
+        allCards = [];
+        data.forEach((repo) => {
+          const content = `
+        <p><strong>Description:</strong> ${repo.description || "No description"}</p>
+        <p><strong>Language:</strong> ${repo.language || "Not specified"}</p>
+        <p><strong>Stars:</strong> ${repo.stargazers_count}</p>
+        <p><strong>Forks:</strong> ${repo.forks_count}</p>
+        <p><strong>Last updated:</strong> ${new Date(repo.updated_at).toLocaleString()}</p>
+        <a href="${repo.html_url}" target="_blank" class="text-blue-400 hover:underline">View on GitHub →</a>
+    `;
+          const card = createCard(repo.name, content, [
+            "github",
+            "repo",
+            repo.language,
+          ]);
+          reposContainer.appendChild(card);
+          allCards.push(card);
+        });
+        setupFilters([
+          "github",
+          "repo",
+          ...new Set(data.map((repo) => repo.language).filter(Boolean)),
+        ]);
+      }
+
+      async function loadGithubStarred() {
+        const data = await fetchData(
+          `https://api.github.com/users/${username}/starred`,
+          githubToken,
+        );
+        const container = document.getElementById("githubStarredContent");
+        container.querySelector("h2").textContent =
+          `Starred Repositories (${data.length} items)`;
+        const starredContainer = container.querySelector("#githubStarred");
+        starredContainer.innerHTML = "";
+        allCards = [];
+        data.forEach((repo) => {
+          const content = `
+        <p><strong>Owner:</strong> ${repo.owner.login}</p>
+        <p><strong>Description:</strong> ${repo.description || "No description"}</p>
+        <p><strong>Language:</strong> ${repo.language || "Not specified"}</p>
+        <p><strong>Stars:</strong> ${repo.stargazers_count}</p>
+        <a href="${repo.html_url}" target="_blank" class="text-blue-400 hover:underline">View on GitHub →</a>
+    `;
+          const card = createCard(repo.name, content, [
+            "github",
+            "starred",
+            repo.language,
+          ]);
+          starredContainer.appendChild(card);
+          allCards.push(card);
+        });
+        setupFilters([
+          "github",
+          "starred",
+          ...new Set(data.map((repo) => repo.language).filter(Boolean)),
+        ]);
+      }
+
+      async function loadGithubGists() {
+        const data = await fetchData(
+          `https://api.github.com/users/${username}/gists`,
+          githubToken,
+        );
+        const container = document.getElementById("githubGistsContent");
+        container.querySelector("h2").textContent =
+          `Gists (${data.length} items)`;
+        const gistsContainer = container.querySelector("#githubGists");
+        gistsContainer.innerHTML = "";
+        allCards = [];
+        data.forEach((gist) => {
+          const files = Object.keys(gist.files).join(", ");
+          const content = `
+        <p><strong>Description:</strong> ${gist.description || "No description"}</p>
+        <p><strong>Files:</strong> ${files}</p>
+        <p><strong>Created at:</strong> ${new Date(gist.created_at).toLocaleString()}</p>
+        <a href="${gist.html_url}" target="_blank" class="text-blue-400 hover:underline">View Gist →</a>
+    `;
+          const card = createCard("Gist", content, ["github", "gist"]);
+          gistsContainer.appendChild(card);
+          allCards.push(card);
+        });
+        setupFilters(["github", "gist"]);
+      }
+
+      async function loadVercelUser() {
+        const data = await fetchData(
+          "https://api.vercel.com/v2/user",
+          vercelToken,
+          true,
+        );
+        const container = document.getElementById("vercelUserContent");
+        container.querySelector("h2").textContent =
+          `Vercel User Information (1 item)`;
+        const content = `
+    <p><strong>Name:</strong> ${data.name}</p>
+    <p><strong>Email:</strong> ${data.email}</p>
+    <p><strong>Username:</strong> ${data.username}</p>
+    <p><strong>Account Type:</strong> ${data.account.type}</p>
+    <p><strong>Created At:</strong> ${new Date(data.createdAt).toLocaleString()}</p>
+`;
+        const card = createCard("Vercel User", content, ["vercel", "user"]);
+        container.querySelector("#vercelUser").innerHTML = "";
+        container.querySelector("#vercelUser").appendChild(card);
+        allCards = [card];
+        setupFilters(["vercel", "user"]);
+      }
+
+      async function loadVercelProjects() {
+        const data = await fetchData(
+          "https://api.vercel.com/v9/projects",
+          vercelToken,
+          true,
+        );
+        const container = document.getElementById("vercelProjectsContent");
+        container.querySelector("h2").textContent =
+          `Vercel Projects (${data.projects.length} items)`;
+        const projectsContainer = container.querySelector("#vercelProjects");
+        projectsContainer.innerHTML = "";
+        allCards = [];
+        data.projects.forEach((project) => {
+          const content = `
+        <p><strong>Name:</strong> ${project.name}</p>
+        <p><strong>Framework:</strong> ${project.framework || "Not specified"}</p>
+        <p><strong>Created At:</strong> ${new Date(project.createdAt).toLocaleString()}</p>
+        <p><strong>Latest Deployment:</strong> ${project.latestDeployments[0]?.url || "N/A"}</p>
+    `;
+          const card = createCard(project.name, content, [
+            "vercel",
+            "project",
+            project.framework,
+          ]);
+          projectsContainer.appendChild(card);
+          allCards.push(card);
+        });
+        setupFilters([
+          "vercel",
+          "project",
+          ...new Set(
+            data.projects.map((project) => project.framework).filter(Boolean),
+          ),
+        ]);
+      }
+
+      async function loadVercelDomains() {
+        const data = await fetchData(
+          "https://api.vercel.com/v5/domains",
+          vercelToken,
+          true,
+        );
+        const container = document.getElementById("vercelDomainsContent");
+        container.querySelector("h2").textContent =
+          `Vercel Domains (${data.domains.length} items)`;
+        const domainsContainer = container.querySelector("#vercelDomains");
+        domainsContainer.innerHTML = "";
+        allCards = [];
+        data.domains.forEach((domain) => {
+          const content = `
+        <p><strong>Name:</strong> ${domain.name}</p>
+        <p><strong>Created At:</strong> ${new Date(domain.createdAt).toLocaleString()}</p>
+        <p><strong>Verified:</strong> ${domain.verified ? "Yes" : "No"}</p>
+        <p><strong>Nameservers:</strong> ${domain.nameservers.join(", ") || "None"}</p>
+    `;
+          const card = createCard(domain.name, content, ["vercel", "domain"]);
+          domainsContainer.appendChild(card);
+          allCards.push(card);
+        });
+        setupFilters(["vercel", "domain"]);
+      }
+
+      window.onload = function () {
+        showTab("githubProfileContent");
+      };
     </script>
-</body>
+  </body>
 </html>

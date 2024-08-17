@@ -55,8 +55,14 @@ app.get("/", (req, res) => {
     }
 
     const replacedData = data
-      .replace(/YOUR_GITHUB_TOKEN/g, process.env.GITHUB_TOKEN)
-      .replace(/YOUR_VERCEL_TOKEN/g, process.env.VERCEL_TOKEN);
+      .replace(
+        "const githubToken = 'YOUR_GITHUB_TOKEN';",
+        `const githubToken = '${process.env.GITHUB_TOKEN}';`,
+      )
+      .replace(
+        "const vercelToken = 'YOUR_VERCEL_TOKEN';",
+        `const vercelToken = '${process.env.VERCEL_TOKEN}';`,
+      );
 
     res.send(replacedData);
   });
