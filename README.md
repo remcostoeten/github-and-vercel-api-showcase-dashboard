@@ -2,7 +2,7 @@
 
 I tend to need to hit the GitHub API quite often, so here's a quick overview of the data I'm trying to fetch or mutate. Built with all vanilla tools (Express, etc.).
 
-Demo: [can be seen here](https://api.remcostoeten.com)
+Demo: Vercel won't let me deploy a express api so i'll have to setup  VPS Someday.
 
 ## Features
 
